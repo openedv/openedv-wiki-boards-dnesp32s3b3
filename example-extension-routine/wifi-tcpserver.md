@@ -38,7 +38,7 @@ WIFI TCPCLIENT
 :::info[例程功能与硬件资源]
 
 本实验主要通过 Socket 编程接口实现了一个 TCPServer 服务器。这个客户端具有以下功能：首先，可以通过按键发送 TCPServer 数据发送至客户端。其次，能够接收客户端发送的数据。最后，实时将接收到的数据显示在 LCD 屏幕上。
-<br />1，LED(RED) - IO4
+<br />1，LED(RED) - IO1_1
 <br />2，正点原子 2.4 寸LCD屏幕
 <br />3，ESP32-S3 内部 WiFi
 

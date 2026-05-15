@@ -28,7 +28,7 @@ WIFI STA
 :::info[例程功能与硬件资源]
 
 扫描附近的 WIFI 信号，并连接到一个真实存在的 WIFI 热点。
-<br />1，LED(RED) - IO4
+<br />1，LED(RED) - IO1_1
 <br />2，正点原子 2.4 寸LCD屏幕
 <br />3，ESP32-S3 内部 WiFi
 

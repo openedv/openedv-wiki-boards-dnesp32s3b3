@@ -80,7 +80,7 @@ WIFI MQTT ALIYUN
 :::info[例程功能与硬件资源]
 
 lwIP 连接阿里云实现数据上传至阿里云服务器。
-<br />1，LED(RED) - IO4
+<br />1，LED(RED) - IO1_1
 <br />2，正点原子 2.4 寸LCD屏幕
 <br />3，ESP32-S3 内部 WiFi
 
