@@ -122,13 +122,13 @@ void app_main(void)
     myiic_init();                                       /* 初始化IIC */
     aw9523b_init();                                     /* 初始化AW9523B */ 
     lcd_init();                                         /* 初始化LCD */
-
+    
     /* 显示实验信息 */
     lcd_show_string(30, 50, 200, 16, 16, "ESP32-S3", RED);
     lcd_show_string(30, 70, 200, 16, 16, "USB SD TEST", RED);
     lcd_show_string(30, 90, 200, 16, 16, "ATOM@ALIENTEK", RED);
     lcd_show_string(30, 110, 200, 16, 16, "status:", RED);
-
+    
     ESP_ERROR_CHECK(sd_spi_init());
     /* 配置SDMMC */
     const tinyusb_msc_sdmmc_config_t config_sdmmc = {
@@ -142,14 +142,12 @@ void app_main(void)
     ESP_ERROR_CHECK(tinyusb_msc_register_callback(TINYUSB_MSC_EVENT_MOUNT_CHANGED, NULL));
     // /* 挂载设备 */
     // ESP_ERROR_CHECK(tinyusb_msc_storage_mount(BASE_PATH));
-    /* 配置USB */
-    const tinyusb_config_t tusb_cfg = {
-        .device_descriptor = &descriptor_config,    /* 设备描述符 */
-        .string_descriptor = string_desc_arr,       /* 字符串描述符 */
-        .string_descriptor_count = sizeof(string_desc_arr) / sizeof(string_desc_arr[0]),    /* 字符串描述符大小 */
-        .external_phy = false,                      /* 使用内部USB PHY */
-        .configuration_descriptor = msc_fs_configuration_desc,      /* 配置描述符 */
-    };
+    /* 配置USB：使用默认配置并覆盖描述符 */
+    tinyusb_config_t tusb_cfg = TINYUSB_DEFAULT_CONFIG();
+    tusb_cfg.descriptor.device = &descriptor_config;    /* 设备描述符 */
+    tusb_cfg.descriptor.string = string_desc_arr;       /* 字符串描述符 */
+    tusb_cfg.descriptor.string_count = sizeof(string_desc_arr) / sizeof(string_desc_arr[0]);    /* 字符串描述符大小 */
+    tusb_cfg.descriptor.full_speed_config = msc_fs_configuration_desc;      /* 全速配置描述符 */
     /* 初始化USB */
     ESP_ERROR_CHECK(tinyusb_driver_install(&tusb_cfg));
 
@@ -161,7 +159,7 @@ void app_main(void)
 }
 ```
 
-此部分代码比较简单，通过 tud_usb_flash()等函数初始化USB。由于该实验例程需要系统将storage 分区模拟成 U 盘，所以在该函数中需要初始化 SPIFFS 分区，其次是用 USB 设备安装函数，用以 USB 设备登记。同时， LCD 显示实验信息， LED 闪烁以示程序正在运行。
+此部分代码比较简单，通过 tud_usb_flash()等函数初始化USB。由于该实验例程需要系统将 storage 分区模拟成 U 盘，所以在该函数中需要初始化 SPIFFS 分区，其次是用 USB 设备安装函数，用以 USB 设备登记。同时， LCD 显示实验信息， LED 闪烁以示程序正在运行。
 
 ## 下载验证
 
@@ -169,12 +167,8 @@ void app_main(void)
 
 ![01](./img/x5.png)
 
-如上图， ESP32 通过 Flash 模拟 U 盘，被电脑识别了，通用串行总线控制器显示的是：USB 大容量存储设备（其实也不算大，也就差不多 4MB...）。此时，开发板的 LED 在闪烁，提示程序运行。开发板的 LCD 显示“connect success.....”，如下图所示：
+如上图， ESP32 通过 SD卡 模拟 U 盘，被电脑识别了，通用串行总线控制器显示的是：USB 大容量存储设备。此时，开发板的 LED 在闪烁，提示程序运行。如下图所示：
 
 ![01](./img/x6.png)
 
-然后我们打开“我的电脑”，可以看见界面显示了通过 Flash 模拟 U 盘后的容量大小，如下图所示：
-
-![01](./img/x7.png)
-
-至此， Flash 模拟 U 盘实验就完成了，通过本实验，我们就可以利用 ESP32 的 Flash 进行 U盘模拟。
+然后我们打开“我的电脑”，可以看见界面显示了通过 SD卡 模拟 U 盘后的容量大小。至此， SD卡 模拟 U 盘实验就完成了，通过本实验，我们就可以利用 ESP32 的 SD卡 进行 U盘模拟。

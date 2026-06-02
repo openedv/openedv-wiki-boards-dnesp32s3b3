@@ -313,6 +313,7 @@ void app_main(void)
     aw9523b_init();                                     /* 初始化AW9523B */
     lcd_init();                                         /* 初始化LCD */
     es8311_init(I2S_SAMPLE_RATE);                       /* ES8311初始化 */
+    es7210_init(true);                                  /* 初始化ES7210 */
 
     while (sd_spi_init())                               /* 检测不到SD卡 */
     {
@@ -346,12 +347,12 @@ void app_main(void)
     vTaskDelay(500);                                    /* 实验信息显示延时 */
 
     text_show_string(30, 50, 200, 16, "正点原子ESP32S3 BOX", 16, 0, RED);
-    text_show_string(30, 70, 200, 16, "音乐播放器实验", 16, 0, RED);
+    text_show_string(30, 70, 200, 16, "WAV 录音机 实验", 16, 0, RED);
     text_show_string(30, 90, 200, 16, "ATOM@ALIENTEK", 16, 0, RED);
 
     while (1)
     {
-       audio_play();   /* 播放音乐 */
+       wav_recorder();                                 /* 录音 */
     }
 }
 ```

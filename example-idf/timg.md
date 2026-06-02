@@ -186,7 +186,7 @@ typedef struct {
 
 ### TIMG驱动解析
 
-在IDF版的06_gp_timer例程中，作者在```06_gp_timer \components\BSP```路径下新增了一个GPTIM文件夹，用于存放gptim.c和gptim.h这两个文件。其中，gptim.h文件负责声明GPTIM相关的函数和变量，而gptim.c文件则实现了GPTIM的驱动代码。下面，我们将详细解析这两个文件的实现内容。
+在IDF版的06_gp_timer例程中，作者在```06_gp_timer \components\BSP```路径下新增了一个TIMG文件夹，用于存放timg.c和timg.h这两个文件。其中，timg.h文件负责声明GPTIM相关的函数和变量，而timg.c文件则实现了TIMG的驱动代码。下面，我们将详细解析这两个文件的实现内容。
 
 #### 1,gptim.h文件
 
@@ -352,7 +352,7 @@ idf_component_register(SRC_DIRS ${src_dirs} INCLUDE_DIRS ${include_dirs} REQUIRE
 
 component_compile_options(-ffast-math -O3 -Wno-error=format=-Wno-format)
 ```
-上述代码中的 GPTIM 驱动需要由开发者自行添加，以确保 GPTIM 驱动能够顺利集成到构建系统中。这一步骤是必不可少的，它确保了 GPTIM 驱动的正确性和可用性，为后续的开发工作提供了坚实的基础。
+上述代码中的 TIMG 驱动需要由开发者自行添加，以确保 TIMG 驱动能够顺利集成到构建系统中。这一步骤是必不可少的，它确保了 TIMG 驱动的正确性和可用性，为后续的开发工作提供了坚实的基础。
 
 ###  实验应用代码
 
