@@ -127,7 +127,6 @@ void app_main(void)
     lcd_show_string(30, 50, 200, 16, 16, "ESP32-S3", RED);
     lcd_show_string(30, 70, 200, 16, 16, "USB SD TEST", RED);
     lcd_show_string(30, 90, 200, 16, 16, "ATOM@ALIENTEK", RED);
-    lcd_show_string(30, 110, 200, 16, 16, "status:", RED);
     
     ESP_ERROR_CHECK(sd_spi_init());
     /* 配置SDMMC */

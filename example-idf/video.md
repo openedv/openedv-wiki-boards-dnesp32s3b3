@@ -165,7 +165,7 @@ void app_main(void)
 
     ret = exfuns_init();        /* 为fatfs相关变量申请内存 */
 
-    text_show_string(30, 30, 200, 16, "正点原子ESP32S3 BOX", 16, 0, RED);
+    text_show_string(30, 30, 200, 16, "正点原子ESP32S3 BOX3", 16, 0, RED);
     text_show_string(30, 50, 200, 16, "视频播放器实验", 16, 0, RED);
     text_show_string(30, 70, 200, 16, "ATOM@ALIENTEK", 16, 0, RED);
     text_show_string(30, 90, 200, 16, "K1:NEXT K2:PREV ", 16, 0, RED);
